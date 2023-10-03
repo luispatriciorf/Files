@@ -1,0 +1,19 @@
+Optimizer: The optimizer is responsible for updating the model's weights during training to minimize the defined loss function. It determines how the model's parameters are adjusted in response to the training data and the calculated gradients.
+Different optimizers have different algorithms for weight updates, and they can impact the training process's speed and effectiveness. Common optimizers include stochastic gradient descent (SGD), Adam, RMSprop, and more.
+Loss Function: The loss function (also known as the objective or cost function) measures the discrepancy between the predicted values of the model and the actual target values in the training data.
+The choice of loss function depends on the nature of the problem you are solving. For example, mean squared error (MSE) is commonly used for regression tasks, while categorical cross-entropy is used for classification tasks.
+Metrics: Metrics are used to evaluate the model's performance during training and can help you understand how well the model is doing on tasks beyond just minimizing the loss.
+Gradiant Descent: fundamental optimization algorithm used in machine learning and deep learning to minimize a loss function and update the parameters (weights) of a model. 
+Batch Gradient Descent:the entire training dataset is used to compute the gradient of the loss function with respect to the model parameters in each iteration.
+Stochastic Gradient Descent (SGD): only one randomly selected training example is used to compute the gradient and update the model parameters in each iteration.
+Mini-Batch Gradient Descent: strikes a balance between batch gradient descent and stochastic gradient descent. It divides the training dataset into smaller, fixed-sized mini-batches.
+The choice of which gradient descent variant to use depends on factors like the dataset size, available computational resources, and the specific problem being solved.
+Epoch: An epoch is a complete pass through the entire training dataset during the training of a machine learning or deep learning model. In other words, it's one full iteration over all training examples.
+Batch Size: The batch size refers to the number of training examples used in each iteration (or mini-batch) during the training process.
+The relationship between the number of epochs and the batch size determines how many parameter updates are made during training.
+Learning Rate: It plays a fundamental role in determining the step size at which the model's parameters (weights and biases) are updated during training. 
+Role of Learning: Control the Step Size, Balance Between Speed and Stability, Hyperparameter Tuning, Adaptive Learning Rates, Learning Rate Scheduling.
+Network Used for Training: During the training phase, the network is exposed to the training dataset, which consists of input data and corresponding target labels.
+Network Used for Testing: Once the training is completed, the trained network is used for making predictions on new, unseen data, which is called the testing or inference phase.
+
+

@@ -1,0 +1,75 @@
+x,y
+0,import pandas as pd; import numpy as np; import cv2; import matplotlib.pyplot as plt; from tensorflow.keras.applications.vgg16 import VGG16; from tensorflow.keras.layers import Conv2D Flatten Dense AveragePooling2D  MaxPooling2D; from tensorflow.keras.models import Sequential; from tensorflow.keras.applications.efficientnet import EfficientNetB1; from tensorflow.keras.applications.xception import Xception; import tensorflow as tf; import keras as K;
+1,The training set is used to: learn the values of the network paramters that minimize the error
+2,The test set is used to: estimate how well a model will generalize to real-world unseen data
+3,The validation set is used to: choose between different values of hyperparamaters for a network
+4,Parameters/hyperparameters can be defined as: parameters that can be learned by the network during training/parameters that must be set by the user before training (parameters are weights which are updated every learning epoch while hyperparameters are learning rate/epochs/initializers)
+5,Estimate how well a model will generalize to real-world unseen data: choose between different values of hyperparamaters for a network
+6,If your model starts training but can't beat a baseline the problem is most likely: the learning rate is not appropriate
+7,By default how does the Keras Dense layer initialize its parameters?: Gaussian and ones (Check Keras docs for Dense Layer)
+8,For the pretrained network EfficientNetB1 what type of layer is at index 138?: keras.layers.pooling.GlobalAveragePooling2D
+9,For the pretrained network Xception what type of layer is at index 17?: keras.layers.convolutional.SeparableConv2D
+10,If the output of the convolutional blocks of your CNN has dimension (17 23 413) and the first layer of your classifier has 3774 neurons how many weights will each neuron in this first dense layer have?: 609436842 (1723413*3774)
+11,Which method will not help correct overfitting: Increasing the number of layers in the network.
+12,What two properties do convolutional neural networks have that make them much more useful for images than fully-connected networks?: Parameter sharing/local pattern matching
+13,Parameters/hyperparameters can be defined as: Parameters that must be set by the user before training/parameters that can be learned by the network during training.
+14,To connect your Google Drive to Google Colab which code do you need to run:drive.mount()
+15,Which of the following layers would be added to a fully-connected network that is overfitting: Dropout - cuz dropout layer drops random no of nuerons in each epoch to make learning hard hence reduces overfitting
+16,A network with an output layer containing 19 neurons has softmax output x while another network with an output layer containing 27 neurons has softmax ouput y. What should the value of x.sum() - y.sum() be?: 0 cuz: sum of an softmax array is always 1 hence x.sum() - y.sum() = 1 - 1 = 0
+17,What two pieces of information does the derivative of the loss function provide?: the amount and frequency with which to update the network parameters
+18,Mini-batch gradient descent is when the model parameters are updated after: a specified subset of training samples is processed
+19,The loss for a neural network is: method for calculating the error between predictions and the targets
+20,When fine-tuning a model the learning rate should be: much lower than when transfer learning so we don't destroy what has already been learned
+21,You need to create a fully-connected NN for a classification problem. The data for your problem has 35 different objects. Your network has one hidden layer with 180 nodes. What should your output layer be: Dense(35 activation='softmax') : because 35 output objects Nueron = 35 and classification problem activation = softmax
+22,You have image data that comes in an array of dimension (19458 51 36). This data needs to be fed into a fully-connected NN. What array dimensions does your data need to be converted to: (19458 1836) fully connected network expects data in 1D array. Hence Transpose of array is used which means multiply the dimension 51*36 = 1836
+23,Given the loss data [43.19550861 37.05879744 28.51779525 26.3347979  21.8854916 20.86482529 22.80926244 25.92848956 28.22753233] from training your model at what epoch would you implement early stopping?: 6
+24,You get your data by first running np.random.seed(5312) array X = np.random.randint(3365 95 104). When the data is scaled and converted to the correct dimensions for a fully-connected network what is the new pixel value at position 5364 for the image at index 2132?
+25,RES24 np.random.seed(5312)  X = np.random.randint(0 255 size=(3365 95 104)) x1 = X/255 x1 = x1.reshape(3365 95*104) print(x1[2132][5364])
+26,If the output of the convolutional blocks of your CNN has dimension (17 23 413) and the first layer of your classifier has 3774 neurons how many weights will each neuron in this first dense layer have?
+27,RES25 model = Sequential([Conv2D(filters=17; kernel_size=(3; 3); strides=1; padding='same'; activation='relu'; input_shape=(28; 28; 1)); Conv2D(filters=23; kernel_size=(3; 3); strides=2; padding='valid'; activation='relu'); Conv2D(filters=413; kernel_size=(3; 3); strides=1; padding='same'; activation='relu'); Flatten(); Dense(3774; activation='softmax')]) print('Weights'; model.layers[4].weights[1].shape)
+28,The confusion matrix for this problem is given by first running np.random.seed(9015) and array np.random.randint(0 100 size=(9 9)). What accuracy does the corresponding model achieve for class 6?
+29,RES28 np.random.seed(9015) cf = np.random.randint(0; 100; size=(9; 9)) print(cf[6; 6] / cf[: ; 6].sum())
+30,Assuming samples are represented as rows use the following info to calculate the output of a network with two hidden layers with all activations=sigmoid  X=np.array([[-2.04774242; 12.91315883;6.13546499];[13....  W1=np.array([[3;1;2];[ 2.... b1=np.array([[-8];[0];[1];[-5... W2=np.array([[3;0;2.. b2=np.array([[3];[8]... W3=np.array([[1;4.. b3 = np.array([[-4]])  
+31,REP30 def sigmoid(x): return 1/(1+np.exp(-x))     def relu(x): return np.maximum(0;x)   Z1=np.dot(W1;X.T)+b1    Z2=np.dot(W2;sigmoid(Z1))+b2  Z3=np.dot(W3;sigmoid(Z2))+b3   print(sigmoid(Z3))
+32,Using the functional API a Conv2D layer keras.initializers.Constant() to set the filter to f=np.array([[-2;-1;0];[3;0;3];[3;-1;-3]]) activation=exponential stride=1 and padding=same what is the full convolutional output for the input array x=np.array([[3.87005104;4.0276171;2.7...
+33,RES32 cnn = Conv2D(1;kernel_size=f.shape;input_shape=x.shape;kernel_initializer=K.initializers.Constant(f);strides=1;padding='same';activation='exponential')(x.reshape(1;6;6;1)) print(cnn)
+34,TOTAL NUMBER OF PARAMETRES IN CNN
+35,RES35 model=Sequential() model.add(Conv2D(32;kernel_size=(5;5);activation='relu';input_shape=(180;180;3))) model.add(AveragePooling2D((2;2))) model.add(Conv2D(32;kernel_size=(5;5);activation='relu')) model.add(AveragePooling2D((2;2))) model.add(Flatten()) model.add(Dense(28;activation='relu')) model.add(Dense(3;activation='softmax')) model.summary()
+36,AVERAGE POOLING
+37,RES36 x=np.array([[1.;23.;30.;1.;5.;20.];[19....  x=tf.reshape(x;[1;5;6;1])  avg_pool_2d=AveragePooling2D(pool_size=(2;2);strides=2;padding='valid') print(avg_pool_2d(x).numpy())
+38,You are going to fine-tune your model which consists of the feature extractor portion of VGG16 and your own classifier. Your classifier has 32 neurons in layer 1; 128 neurons in layer 2; and an output layer suitable for data that has 6 classes. The input data has dimension (169;169;3). If you freeze the parameters in the first 7 convolutional layers of the feature extractor;how many non-trainable parameters will this (entire) network have?
+39,REP38 vgg16 = VGG16(include_top=False; input_shape=(169;169;3))  for layer in vgg16.layers[:7]: layer.trainable=False  model=Sequential([vgg16; Flatten(); Dense(32); Dense(128); Dense(6 activation='softmax')]) print(model.count_params())
+40,How many trainable parameters in total do the following layers have: a Conv2D(256;(3;3); activation='sigmoid') layer followed by a Conv2D(512;(3;3); activation='sigmoid')layer where the input to the first Conv2d() layer has dimesions (224;224;32)?
+41,RES40 model=Sequential([Conv2D(256;kernel_size=(3;3);activation='sigmoid';input_shape=(224;224;32));Conv2D(512;kernel_size=(3;3);activation='sigmoid')])model.summary()
+42,MAX POOLING For the input array x=np.array([[ 2.;7.;9.;5.;4.;15.];... poolsize=(2;2) and strides=2 what is the output of applying Max Pooling: 
+43,RES42 x=np.array([[...  x=tf.reshape(x;[1;4;6;1]) max_pool_2d=MaxPooling2D(pool_size=(2;2);strides=2) print(max_pool_2d(x).numpy())
+44,For the pretrained network EfficientNetB1 what type of layer is at index 138?
+45,REP44 eff=EfficientNetB1() print(eff.layers[138])
+46,For the pretrained network Xception what type of layer is at index 17?
+47,REP46 model=Xception() print(model.layers[17])
+48,Using a single Conv2D() layer with 64 filters of size 7x7 strides of 10 and valid (or same: reemplazar 'valid' por 'same') padding what are the ouptut dimensions of this layer for the input data given by x=np.random.normal(size=(37;338;503;1))?
+49,RES48 x = np.ran....  cnn=Conv2D(64;kernel_size=(7;7);input_shape=x.shape;strides=10;padding='valid')(x.reshape(37;338;503;1)) print(cnn.shape)
+50,Filters example: X=cv2.rectangle(np.ones((500;500;3); np.uint8) * 255; (100; 100); (200; 200); (0; 0; 0); thickness=cv2.FILLED) gray_X = cv2.cvtColor(X; cv2.COLOR_RGB2GRAY) h= np.array([[-1;-2;1];[0;0;0];[1;2;1]]) v=np.array([[-1;0;1];[-2;0;2];[-1;0;1]]) f_h=cv2.filter2D(gray_X;-1;h) f_v=cv2.filter2D(gray_X;-1;v)
+51,Calculate via code the convolutional output of the above array and the filters f3 and f5 assuming padding='valid' padding='same' Also calculate the output of a Conv2d layer using the above input data
+52,RES51: model=Sequential() model.add(Conv2D(1; kernel_size=(3; 3); input_shape=(6;6;1); kernel_initializer=tf.constant_initializer(f3); use_bias=False)) conv__f3=model.predict(x.reshape(1;6;6;1))[0; :; :; 0] print(conv__f3) #kernel_size is based on f shape input_shape is based on x
+53,Pooling: Calculate the output of a pooling operation assuming no padding and using a pooling layer pool_size = (2; 2) and strides=2 and Max Pooling is used / pool_size = (2; 2) and strides=2 and Average Pooling is used
+54,RES5 MaxPooling: import tensorflow as tf from tensorflow.keras.layers import MaxPooling2D import numpy as np x = x.reshape([1;6;6;1]) max_pool_2d= MaxPooling2D(pool_size=(2; 2); strides=2) print(max_pool_2d) out_s2 = max_pool_2d(x).numpy() print(out_s2) print(out_s2.shape)
+55,RES54 x=x.reshape([1; 6; 6; 1]).astype(np.float32) avg_pool_2d=AveragePooling2D(pool_size=(2; 2); strides=2) print(avg_pool_2d) out_s2 = avg_pool_2d(x).numpy() print(out_s2) print(out_s2.shape)
+56,Parameters calculation: How many trainable parameters does the following model have: input data has dimensions (180;180;3) Conv2D(32; kernel_size=(5; 5); activation='relu') AveragePooling(pool_size=(2; 2); strides=2) Conv2D(32; kernel_size=(5; 5); activation='relu') AveragePooling(pool_size=(2; 2); strides=2) Flatten() Dense(128; activation='relu') Dense(3; activation='softmax')"
+57,RES56: model=tf.keras.Sequential() model.add(Conv2D(32; kernel_size=(5; 5); activation='relu'; input_shape=(180;180;3))) model.add(AveragePooling2D(pool_size=(2; 2); strides=2)) model.add(Conv2D(32; kernel_size=(5; 5); activation='relu')) model.add(AveragePooling2D(pool_size=(2; 2); strides=2)) model.add(Flatten()) model.add(Dense(128; activation='relu')) model.add(Dense(3; activation='softmax')) model.summary()"
+58,Weights calculation: How many weights in total do the following layers have: a Conv2D(64; (3; 3); activation='sigmoid') layer followed by a Conv2D(64; (3; 3); activation='sigmoid') layer where the input to the first Conv2d() layer has dimesions (120; 120; 128)?
+59,RES58 model=tf.keras.Sequential() model.add(Conv2D(64; (3; 3); activation='sigmoid'; input_shape=(120;120;128); use_bias = False)) model.add(Conv2D(64; (3; 3); activation='sigmoid'; use_bias = False)) model.summary()
+60,Purpose of a pooling layer? to reduce the spatial dimensions of feature maps while retaining important information and improving computational efficiency.
+61,Difference parameter and hyperparameter? Parameters are learned internal variables in a model while hyperparameters are predefined settings that influence how a model learns; parameters are optimized during training and hyperparameters are set before training.
+62,What are training; validation; and test datasets used for? Training data is used to train a machine learning model; validation data helps fine-tune and select the best model during training; and test data is used to evaluate the model's performance on unseen data.
+63,What is a baseline and how is it used? A baseline is a simple model used as a reference point for comparing the performance of more complex models; helping to assess whether the complexity of advanced models is justified.
+64,What are the first 2 goals we should have when creating a deep learning model? accuracy and generalization.
+65,What are some ways to deal with overfitting? Increase Training Data; Dropout; Early Stopping; Data Augmentation; etc.
+66,What are some common problems when training a model and how can they be overcome? Overfitting: How can you mitigate overfitting in a machine learning model? Noisy data: How can you handle data with errors and outliers? Feature engineering: What steps are taken to improve feature quality? Hyperparameter tuning: How do you find optimal hyperparameters for a model?
+67,Transfer learning/Fine-tuning what is it? is a machine learning technique where a pre-trained model's knowledge and parameters are used as a starting point to build a new model for a related task.
+68,Transfer learning/Fine-tuning why do we do it? Reduced Data Requirement; Faster Convergence; Improved Performance; Generalization; Resource Efficiency.
+69,Data augmentation what is it? why do we do it? is the process of creating new training data by applying transformations to the existing dataset. It's done to increase data diversity; improve model generalization; address data imbalance; and make efficient use of existing data.
+70,how to create a data augmentation layer
+71,RES70 from tensorflow.keras.preprocessing.image import ImageDataGenerator   data_generator = ImageDataGenerator(    rotation_range=20;  # Randomly rotate images by up to 20 degrees      width_shift_range=0.1;  # Randomly shift the width by up to 10%    height_shift_range=0.1;  # Randomly shift the height by up to 10%    shear_range=0.2;  # Shear transformations    zoom_range=0.2;  # Zoom in/out on images    horizontal_flip=True;  # Randomly flip images horizontally    fill_mode='nearest'  # How to fill in newly created pixels)
+72,Example usage to augment an image
+73,RES72 original_image = np.array(...)  # Load your image as a NumPy array augmented_images = data_generator.flow(np.array([original_image]))
